@@ -1,0 +1,50 @@
+<%- include('./shared/header') %>
+
+<section class="pt-5 mt-5 container">
+  <h1>File upload</h1>
+
+  <form action="/" method="POST" enctype="multipart/form-data">
+    <div class="mb-3">
+      <label class="required mb-1">File (max size is 5mb or your file will be corrupted)</label>
+      <input class="form-control" type="file" name="file" required />
+    </div>
+
+    <div class="mb-3">
+      <label class="mb-1">Password</label>
+      <input type="password" class="form-control" id="password" placeholder="File Password" name="password" />
+    </div>
+
+    <div class="mb-3 form-check">
+      <input class="form-check-input shadow-none" type="checkbox" value="" id="show-password">
+      <label class="form-check-label show-password" for="show-password">
+        Show password
+      </label>
+    </div>
+
+    <button type="submit" class="btn btn-primary w-100">Submit</button>
+  </form>
+
+  <% if (fileError == true) { %>
+  <p class="alert alert-danger mt-3 text-capitalize" role="alert">
+    sorry, the file you are uploading is not supported
+    <br>
+    supported files = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'application/pdf', 'text/plain']
+  </p>
+  <% } %>
+
+  <% if (fileNotFound != null) { %>
+  <p class="alert alert-danger mt-3 text-capitalize" role="alert">
+    sorry, the file you are uploading is not found
+  </p>
+  <% } %>
+
+  <% if (fileDownloadLink != null) { %>
+  <div class="alert alert-success mt-3" role="alert">
+    <p class="text-capitalize">your file is uploaded</p>
+    <a class="link-info" href="<%= fileDownloadLink %>"><%= fileDownloadLink %></a>
+  </div>
+  <% } %>
+</section>
+
+<%- include('./shared/animation')  %>
+<%- include('./shared/footer') %>
